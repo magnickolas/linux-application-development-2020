@@ -167,6 +167,8 @@ int main(int argc, char** argv) {
             }
             block_lines_offset = 0;
             block_lines_start_offset = 0;
+        } else if (c == '0') {
+            block_lines_start_offset = 0;
         } else if (c == 'q' || c == KEY_ESC) {
             quit = true;
         }
