@@ -1,8 +1,8 @@
-TARGET=view
+TARGET=show
 
 all: $(TARGET)
 
-$(TARGET): view.c
+$(TARGET): $(TARGET).c
 	gcc -O0 -g -o $@ $< -lncursesw
 
 .phony clean:
