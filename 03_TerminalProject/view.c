@@ -2,6 +2,8 @@
 #include <locale.h>
 #include <sys/stat.h>
 
+#define KEY_ESC 27
+
 ssize_t get_line_length(FILE* fp) {
     ssize_t res = 0;
     int c;
@@ -36,6 +38,7 @@ int main(int argc, char** argv) {
     FILE* fp = fopen(fname, "r");
     
     initscr();
+    set_escdelay(0);
     curs_set(0);
     noecho();
     cbreak();
@@ -82,17 +85,23 @@ int main(int argc, char** argv) {
         }
         refresh();
         int c = getch();
-        if (c == KEY_UP) { // Forward shift by 1 line, get the top
-            // TODO
-        } else if (c == KEY_DOWN) { // Backward shift by 1 line, get the bottom
-            // TODO
-        } else if (c == KEY_LEFT) { // Decrease line beginning offset by 1
-            if (--block_lines_start_offset < 0) {
-                block_lines_start_offset = 0;
+        if (c == KEY_UP || c == 'k') {
+            // Forward shift by 1 line, get the top
+            if (block_lines_offset > 0) {
+                block_lines_offset--;
             }
-        } else if (c == KEY_RIGHT) { // Increase line beginning offset by 1
+            // TODO
+        } else if (c == KEY_DOWN || c == 'j' || c == ' ') {
+            // Backward shift by 1 line, get the bottom
+            block_lines_offset++;
+            // TODO
+        } else if (c == KEY_LEFT || c == 'h') { // Decrease line beginning offset by 1
+            if (block_lines_start_offset > 0) {
+                block_lines_start_offset--;
+            }
+        } else if (c == KEY_RIGHT || c == 'l') { // Increase line beginning offset by 1
             block_lines_start_offset++;
-        } else if (c == 'q') {
+        } else if (c == 'q' || c == KEY_ESC) {
             quit = true;
         }
     }
