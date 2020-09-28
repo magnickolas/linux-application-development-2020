@@ -1,6 +1,7 @@
 #include <assert.h>
 #include <locale.h>
 #include <ncurses.h>
+#include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
 
@@ -66,15 +67,17 @@ int main(int argc, char** argv) {
     int height, width;
     getmaxyx(stdscr, height, width);
 
-    ssize_t from_pos = 0, to_pos = 0;
-    int max_lines_num = height - 1;
+    size_t max_lines_num = height;
+    if (max_lines_num > 0) {
+        max_lines_num--;
+    }
     ssize_t block_lines_start_poses[max_lines_num + 1];
     block_lines_start_poses[0] = 0;
     ssize_t block_lines_start_offset = 0;
     ssize_t block_lines_offset = 0;
-    ssize_t lines_num = 0;
+    size_t lines_num = 0;
 
-    for (ssize_t i = 1; i <= max_lines_num; i++) {
+    for (size_t i = 1; i <= max_lines_num; i++) {
         ssize_t len = get_line_chars_num(fp);
         if (len == -1) {
             break;
@@ -88,20 +91,20 @@ int main(int argc, char** argv) {
 
     while (!quit) {
         clear();
-        ssize_t max_block_line_length = 0;
+        int max_block_line_length = 0;
         // Status line
         printw("%s--%ld:%ld", fname, block_lines_offset, block_lines_start_offset);
         hline('-', width);
         move(1, 0);
         // Output file content block
-        for (ssize_t i = 0; i < lines_num; i++) {
+        for (size_t i = 0; i < lines_num; i++) {
             ssize_t pos_to_seek = block_lines_start_poses[i] + block_lines_start_offset;
             if (pos_to_seek >= block_lines_start_poses[i+1]) {
                 pos_to_seek = block_lines_start_poses[i+1] - 1;
             }
             fseek(fp, pos_to_seek, SEEK_SET);
-            fgets(line_buf, width, fp);
-            ssize_t len = strlen(line_buf);
+            assert(fgets(line_buf, width, fp) != NULL);
+            int len = strlen(line_buf);
             if (len > max_block_line_length) {
                 max_block_line_length = len;
             }
@@ -130,7 +133,7 @@ int main(int argc, char** argv) {
             // Backward shift by 1 line, get the bottom
             if (lines_num > 0) {
                 block_lines_offset++;
-                for (ssize_t i = 0; i < lines_num; i++) {
+                for (size_t i = 0; i < lines_num; i++) {
                     block_lines_start_poses[i] = block_lines_start_poses[i+1];
                 }
                 fseek(fp, block_lines_start_poses[lines_num], SEEK_SET);
@@ -157,7 +160,7 @@ int main(int argc, char** argv) {
             fseek(fp, 0, SEEK_SET);
             lines_num = 0;
             block_lines_start_poses[0] = 0;
-            for (ssize_t i = 1; i <= max_lines_num; i++) {
+            for (size_t i = 1; i <= max_lines_num; i++) {
                 ssize_t len = get_line_chars_num(fp);
                 if (len == -1) {
                     break;

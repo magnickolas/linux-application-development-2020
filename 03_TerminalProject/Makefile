@@ -1,9 +1,10 @@
 TARGET=show
+CFLAGS = -O2 -Wall -Werror -Wextra
 
 all: $(TARGET)
 
 $(TARGET): $(TARGET).c
-	gcc -O0 -g -o $@ $< -lncursesw
+	$(CC) $(CFLAGS) -o $@ $< -lncursesw
 
 .phony clean:
 	rm -rf $(TARGET)
