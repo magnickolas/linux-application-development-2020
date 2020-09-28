@@ -143,14 +143,30 @@ int main(int argc, char** argv) {
                     }
                 }
             }
-        } else if (c == KEY_LEFT || c == 'h') { // Decrease line beginning offset by 1
+        } else if (c == KEY_LEFT || c == 'h') {
+            // Decrease line beginning offset by 1
             if (block_lines_start_offset > 0) {
                 block_lines_start_offset--;
             }
-        } else if (c == KEY_RIGHT || c == 'l') { // Increase line beginning offset by 1
+        } else if (c == KEY_RIGHT || c == 'l') {
+            // Increase line beginning offset by 1
             if (max_block_line_length > 1) {
                 block_lines_start_offset++;
             }
+        } else if (c == 'g') {
+            fseek(fp, 0, SEEK_SET);
+            lines_num = 0;
+            block_lines_start_poses[0] = 0;
+            for (ssize_t i = 1; i <= max_lines_num; i++) {
+                ssize_t len = get_line_chars_num(fp);
+                if (len == -1) {
+                    break;
+                }
+                block_lines_start_poses[i] = block_lines_start_poses[i-1] + len;
+                lines_num++;
+            }
+            block_lines_offset = 0;
+            block_lines_start_offset = 0;
         } else if (c == 'q' || c == KEY_ESC) {
             quit = true;
         }
