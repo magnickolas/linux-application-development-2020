@@ -1,4 +1,4 @@
-TARGET=show
+TARGET=Show
 CFLAGS = -O2 -Wall -Werror -Wextra
 
 all: $(TARGET)
