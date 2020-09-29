@@ -4,7 +4,7 @@ CFLAGS = -O2 -Wall -Werror -Wextra
 all: $(TARGET)
 
 $(TARGET): show.o block.o file_with_name.o
-	$(CC) $(CFLAGS) -o $@ $^ -lncursesw
+	$(CC) -o $@ $^ -lncursesw 
 
 show.o: show.c
 	$(CC) $(CFLAGS) -c $<
