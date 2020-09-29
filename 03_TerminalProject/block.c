@@ -138,4 +138,3 @@ void move_to_beginning(BlockState* bs) {
 void move_to_line_start(BlockState* bs) {
     bs->block_lines_start_offset = 0;
 }
-

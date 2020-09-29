@@ -16,4 +16,4 @@ file_with_name.o: file_with_name.c
 	$(CC) $(CFLAGS) -c $<
 
 .phony clean:
-	rm -rf $(TARGET)
+	rm -rf *.o $(TARGET)

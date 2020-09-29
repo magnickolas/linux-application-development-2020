@@ -14,4 +14,3 @@ void move_right(BlockState*);
 void move_to_beginning(BlockState*);
 void move_to_line_start(BlockState*);
 #endif //BLOCK_H_
-

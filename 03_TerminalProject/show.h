@@ -5,4 +5,3 @@ typedef struct WindowSize {
     int width;
 } WindowSize;
 #endif //SHOW_H_
-

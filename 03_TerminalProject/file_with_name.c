@@ -40,4 +40,3 @@ ssize_t get_line_chars_num_backwards(FileWithName f) {
     res += (c == '\n');
     return res;
 }
-
