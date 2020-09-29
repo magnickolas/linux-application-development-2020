@@ -47,7 +47,7 @@ int main(int argc, char** argv) {
     bool quit = false;
 
     while (!quit) {
-        clear();
+        erase();
         output_content(bs, ws);
         refresh();
 
