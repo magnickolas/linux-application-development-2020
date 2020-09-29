@@ -60,10 +60,14 @@ int main(int argc, char** argv) {
             move_left(bs);
         } else if (c == KEY_RIGHT || c == 'l') {
             move_right(bs);
-        } else if (c == 'g') {
+        } else if (c == KEY_HOME || c == 'g') {
             move_to_beginning(bs);
         } else if (c == '0') {
             move_to_line_start(bs);
+        } else if (c == KEY_PPAGE) {
+            move_page_up(bs);
+        } else if (c == KEY_NPAGE) {
+            move_page_down(bs);
         } else if (c == 'q' || c == KEY_ESC) {
             quit = true;
         }

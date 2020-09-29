@@ -13,4 +13,6 @@ void move_left(BlockState*);
 void move_right(BlockState*);
 void move_to_beginning(BlockState*);
 void move_to_line_start(BlockState*);
+void move_page_up(BlockState*);
+void move_page_down(BlockState*);
 #endif //BLOCK_H_

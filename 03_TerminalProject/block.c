@@ -138,3 +138,15 @@ void move_to_beginning(BlockState* bs) {
 void move_to_line_start(BlockState* bs) {
     bs->block_lines_start_offset = 0;
 }
+
+void move_page_up(BlockState* bs) {
+    for (size_t i = 0; i < bs->max_lines_num; i++) {
+        move_up(bs);
+    }
+}
+
+void move_page_down(BlockState* bs) {
+    for (size_t i = 0; i < bs->max_lines_num; i++) {
+        move_down(bs);
+    }
+}
