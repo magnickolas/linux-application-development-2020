@@ -8,9 +8,9 @@
 
 #define KEY_ESC 27
 
-WindowSize get_window_size() {
+WindowSize wget_window_size(WINDOW* win) {
     WindowSize res;
-    getmaxyx(stdscr, res.height, res.width);
+    getmaxyx(win, res.height, res.width);
     return res;
 }
 
@@ -41,15 +41,24 @@ int main(int argc, char** argv) {
     cbreak();
     keypad(stdscr, true);
 
-    WindowSize ws = get_window_size();
-    BlockState* bs = init_block_state(f, ws);
+    WindowSize ws = wget_window_size(stdscr);
+
+    WINDOW* win = newwin(ws.height-1, ws.width, 1, 0);
+    WINDOW* win_status = newwin(1, ws.width, 0, 0);
+    WindowSize ws_win = wget_window_size(win);
+    BlockState* bs = init_block_state(f, ws_win);
+    refresh();
 
     bool quit = false;
 
     while (!quit) {
-        erase();
-        output_content(bs, ws);
-        refresh();
+        werase(win);
+        werase(win_status);
+        output_status_line(bs, win_status);
+        output_content(bs, ws_win, win);
+        box(win, 0, 0);
+        wrefresh(win);
+        wrefresh(win_status);
 
         int c = getch();
         if (c == KEY_UP || c == 'k') {

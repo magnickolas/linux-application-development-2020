@@ -21,8 +21,8 @@ BlockState* init_block_state(FileWithName f, const WindowSize ws) {
     BlockState* bs = malloc(sizeof(BlockState));
     bs->f = f;
     bs->max_lines_num = ws.height;
-    if (bs->max_lines_num > 0) {
-        bs->max_lines_num--;
+    if (bs->max_lines_num >= 2) {
+        bs->max_lines_num -= 2;
     }
     bs->lines_num = 0;
     bs->block_lines_start_poses =
@@ -50,12 +50,13 @@ void free_block_state(BlockState* bs) {
     free(bs);
 }
 
-void output_content(BlockState* bs, const WindowSize ws) {
-    bs->max_block_line_length = 0;
+void output_status_line(BlockState* bs, WINDOW* win) {
     // Status line
-    printw("%s--%ld:%ld", bs->f.name, bs->block_lines_offset, bs->block_lines_start_offset);
-    hline('-', ws.width);
-    move(1, 0);
+    wprintw(win, "%s %ld:%ld", bs->f.name, bs->block_lines_offset, bs->block_lines_start_offset);
+}
+
+void output_content(BlockState* bs, const WindowSize ws, WINDOW* win) {
+    bs->max_block_line_length = 0;
     // Output file content block
     for (size_t i = 0; i < bs->lines_num; i++) {
         ssize_t pos_to_seek = bs->block_lines_start_poses[i] + bs->block_lines_start_offset;
@@ -63,12 +64,14 @@ void output_content(BlockState* bs, const WindowSize ws) {
             pos_to_seek = bs->block_lines_start_poses[i+1] - 1;
         }
         fseek(bs->f.fp, pos_to_seek, SEEK_SET);
-        assert(fgets(bs->line_buf, ws.width, bs->f.fp) != NULL);
+        assert(fgets(bs->line_buf, ws.width-2, bs->f.fp) != NULL);
         int len = strlen(bs->line_buf);
         if (len > bs->max_block_line_length) {
             bs->max_block_line_length = len;
         }
-        printw("%s", bs->line_buf);
+
+        wmove(win, i+1, 1);
+        wprintw(win, "%s", bs->line_buf);
     }
 }
 
