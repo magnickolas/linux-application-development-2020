@@ -1,10 +1,12 @@
 #include <assert.h>
 #include <locale.h>
 #include <ncurses.h>
+#include <string.h>
 #include <sys/stat.h>
-#include "./show.h"
-#include "./file_with_name.h"
 #include "./block.h"
+#include "./file_with_name.h"
+#include "./msgs.h"
+#include "./show.h"
 
 #define KEY_ESC 27
 
@@ -15,20 +17,31 @@ WindowSize wget_window_size(WINDOW* win) {
 }
 
 int main(int argc, char** argv) {
-    if (argc < 2) {
-        fprintf(stderr, "Missing filename\n");
-        return 1;
-    }
     setlocale(LC_ALL, "");
 
+    if (argc < 2) {
+        print_missing_filename_message(argv[0]);
+        return 1;
+    } else if (argc > 2) {
+        print_too_many_arguments_message(argv[0]);
+        return 1;
+    } else if (argv[1][0] == '-') {
+        if (!strcmp(argv[1], "--help") || !strcmp(argv[1], "-h")) {
+            print_usage_message(argv[0]);
+            return 0;
+        } else {
+            print_invalid_option_message(argv[0], argv[1] + 1);
+            return 1;
+        }
+    }
     const char* fname = argv[1];
     struct stat st;
     if (stat(fname, &st) != 0) {
-        fprintf(stderr, "%s: No such file or directory\n", fname);
+        print_no_such_file_message(argv[1]);
         return 1;
     }
     if (S_ISDIR(st.st_mode)) {
-        fprintf(stderr, "%s: Is a directory\n", fname);
+        print_is_a_directory_message(argv[1]);
         return 1;
     }
 
@@ -42,7 +55,6 @@ int main(int argc, char** argv) {
     keypad(stdscr, true);
 
     WindowSize ws = wget_window_size(stdscr);
-
     WINDOW* win = newwin(ws.height-1, ws.width, 1, 0);
     WINDOW* win_status = newwin(1, ws.width, 0, 0);
     WindowSize ws_win = wget_window_size(win);
