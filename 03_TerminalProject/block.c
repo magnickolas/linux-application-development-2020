@@ -52,14 +52,17 @@ void free_block_state(BlockState* bs) {
 
 void output_status_line(BlockState* bs, WINDOW* win) {
     // Status line
-    wprintw(win, "%s %ld:%ld", bs->f.name, bs->block_lines_offset, bs->block_lines_start_offset);
+    wprintw(win,
+            "%s %ld:%ld",
+            bs->f.name, bs->block_lines_offset, bs->block_lines_start_offset);
 }
 
 void output_content(BlockState* bs, const WindowSize ws, WINDOW* win) {
     bs->max_block_line_length = 0;
     // Output file content block
     for (size_t i = 0; i < bs->lines_num; i++) {
-        ssize_t pos_to_seek = bs->block_lines_start_poses[i] + bs->block_lines_start_offset;
+        ssize_t pos_to_seek = bs->block_lines_start_poses[i] +
+            bs->block_lines_start_offset;
         if (pos_to_seek >= bs->block_lines_start_poses[i+1]) {
             pos_to_seek = bs->block_lines_start_poses[i+1] - 1;
         }
@@ -69,9 +72,7 @@ void output_content(BlockState* bs, const WindowSize ws, WINDOW* win) {
         if (len > bs->max_block_line_length) {
             bs->max_block_line_length = len;
         }
-
-        wmove(win, i+1, 1);
-        wprintw(win, "%s", bs->line_buf);
+        mvwprintw(win, i+1, 1, "%s", bs->line_buf);
     }
 }
 
@@ -86,7 +87,9 @@ void move_up(BlockState* bs) {
         }
         assert(bs->block_lines_start_poses[0] >= 1);
         ssize_t backward_offset = 2 - (bs->block_lines_start_poses[0] == 1);
-        fseek(bs->f.fp, bs->block_lines_start_poses[0] - backward_offset, SEEK_SET);
+        fseek(bs->f.fp,
+                bs->block_lines_start_poses[0] - backward_offset,
+                SEEK_SET);
         ssize_t len = get_line_chars_num_backwards(bs->f);
         bs->block_lines_start_poses[0] -= len;
     }

@@ -1,4 +1,4 @@
-TARGET=Show
+TARGET = Show
 CFLAGS = -O2 -Wall -Werror -Wextra `pkg-config ncursesw --cflags`
 LDFLAGS = `pkg-config --libs ncursesw`
 
