@@ -1,10 +1,11 @@
 TARGET=Show
-CFLAGS = -O2 -Wall -Werror -Wextra
+CFLAGS = -O2 -Wall -Werror -Wextra `pkg-config ncursesw --cflags`
+LDFLAGS = `pkg-config --libs ncursesw`
 
 all: $(TARGET)
 
 $(TARGET): show.o block.o file_with_name.o
-	$(CC) -o $@ $^ -lncursesw 
+	$(CC) -o $@ $^ $(LDFLAGS)
 
 show.o: show.c
 	$(CC) $(CFLAGS) -c $<
