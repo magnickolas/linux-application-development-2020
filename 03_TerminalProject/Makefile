@@ -1,5 +1,5 @@
 TARGET = Show
-CFLAGS = -O2 -Wall -Werror -Wextra `pkg-config ncursesw --cflags`
+CFLAGS = -O0 -g -Wall -Werror -Wextra `pkg-config ncursesw --cflags`
 LDFLAGS = `pkg-config --libs ncursesw`
 
 all: $(TARGET)
