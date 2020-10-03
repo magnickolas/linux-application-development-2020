@@ -110,6 +110,14 @@ void output_content(BlockState* bs, const WindowSize ws, WINDOW* win) {
             if (wcslen(prefix_buf) < bs->block_lines_start_offset ||
                     prefix_buf[bs->block_lines_start_offset - 1] == '\n') {
                 should_read = false;
+            } else {
+                fpos_t tmp_pos;
+                fgetpos(bs->f.fp, &tmp_pos);
+                fgetwc(bs->f.fp);
+                if (feof(bs->f.fp)) {
+                    should_read = false;
+                }
+                fsetpos(bs->f.fp, &tmp_pos);
             }
         }
         if (!should_read) {
@@ -117,10 +125,12 @@ void output_content(BlockState* bs, const WindowSize ws, WINDOW* win) {
         } else {
             assert(fgetws(bs->line_buf, ws.width-2, bs->f.fp) != NULL);
             int len = wcslen(bs->line_buf);
+            if (bs->line_buf[len-1] == '\n') {
+                len--;
+            }
             if (len > bs->max_block_line_length) {
                 bs->max_block_line_length = len;
             }
-
             mvwaddwstr(win, i+1, 1, bs->line_buf);
         }
     }
@@ -157,7 +167,7 @@ void move_left(BlockState* bs) {
 }
 
 void move_right(BlockState* bs) {
-    if (bs->max_block_line_length > 1) {
+    if (bs->max_block_line_length > 0) {
         bs->block_lines_start_offset++;
     }
 }
