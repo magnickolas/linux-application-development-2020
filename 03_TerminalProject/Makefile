@@ -11,7 +11,7 @@ show.o: show.c
 	$(CC) $(CFLAGS) -c $<
 
 block.o: block.c
-	$(CC) $(CFLAGS) -c $<
+	$(CC) $(CFLAGS) -c $< -lncursesw
 
 file_with_name.o: file_with_name.c
 	$(CC) $(CFLAGS) -c $<

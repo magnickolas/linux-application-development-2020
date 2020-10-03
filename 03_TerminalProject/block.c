@@ -1,5 +1,5 @@
 #include <assert.h>
-#include <ncursesw/ncurses.h>
+#include <ncurses.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -102,7 +102,7 @@ void output_content(BlockState* bs, const WindowSize ws, WINDOW* win) {
         fsetpos(bs->f.fp, &bs->block_lines_start_poses[i]);
         bool should_read = true;
         if (bs->block_lines_start_offset > 0) {
-            fgetws(prefix_buf, bs->block_lines_start_offset + 1, bs->f.fp);
+            assert(fgetws(prefix_buf, bs->block_lines_start_offset + 1, bs->f.fp) != NULL);
             if (wcslen(prefix_buf) < bs->block_lines_start_offset ||
                     prefix_buf[bs->block_lines_start_offset - 1] == '\n') {
                 should_read = false;
