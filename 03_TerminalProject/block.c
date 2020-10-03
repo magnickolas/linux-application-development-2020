@@ -16,6 +16,7 @@ struct BlockState {
     size_t lines_start_poses_len;
     size_t block_lines_offset;
     size_t block_lines_start_offset;
+    bool reached_eof;
     wchar_t* line_buf;
     int max_block_line_length;
 };
@@ -35,10 +36,12 @@ BlockState* init_block_state(FileWithName f, const WindowSize ws) {
     bs->block_lines_offset = 0;
     bs->block_lines_start_offset = 0;
     bs->line_buf = malloc((ws.width + 2) * sizeof(*bs->line_buf));
+    bs->reached_eof = false;
     fgetpos(bs->f.fp, &bs->block_lines_start_poses[0]);
     for (size_t i = 1; i <= bs->max_lines_num; i++) {
         ssize_t len = get_line_chars_num(bs->f);
         if (len == -1) {
+          bs->reached_eof = true;
             bs->lines_start_poses =
                 realloc(bs->lines_start_poses,
                         i * sizeof(*bs->lines_start_poses));
@@ -54,7 +57,7 @@ BlockState* init_block_state(FileWithName f, const WindowSize ws) {
 }
 
 static size_t fetch_n_lines_poses(BlockState* bs, size_t n) {
-    if (bs->lines_start_poses_len >= n + 1) {
+    if (bs->reached_eof || bs->lines_start_poses_len >= n + 1) {
         return bs->lines_start_poses_len - 1;
     }
     size_t new_len = bs->lines_start_poses_len * 1.5;
@@ -69,6 +72,7 @@ static size_t fetch_n_lines_poses(BlockState* bs, size_t n) {
         fsetpos(bs->f.fp, &bs->lines_start_poses[i-1]);
         ssize_t len = get_line_chars_num(bs->f);
         if (len == -1) {
+            bs->reached_eof = true;
             bs->lines_start_poses =
                 realloc(bs->lines_start_poses,
                         i * sizeof(*bs->lines_start_poses));
