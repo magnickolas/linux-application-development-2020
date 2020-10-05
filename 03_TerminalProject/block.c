@@ -123,7 +123,7 @@ void output_content(BlockState* bs, const WindowSize ws, WINDOW* win) {
         if (!should_read) {
             mvwaddwstr(win, i+1, 1, L"\n");
         } else {
-            assert(fgetws(bs->line_buf, ws.width-2, bs->f.fp) != NULL);
+            if (fgetws(bs->line_buf, ws.width-2, bs->f.fp) == NULL) {} // try to show anyway
             int len = wcslen(bs->line_buf);
             if (bs->line_buf[len-1] == '\n') {
                 len--;
