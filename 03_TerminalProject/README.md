@@ -23,9 +23,6 @@ Show the file's content, scrolling is supported.
 | PgDn                      | scroll one page down     |
 | ESC or 'q'                | quit                     |
 
-## Prerequisites
-
-
 ## Building
 Install pkg-config, libncursesw and gcc or clang compiler.
 
