@@ -17,7 +17,7 @@ void print_usage_message(const char* name) {
         "\n"
         "Key bindings:\n"
         "  UpArrow or 'k'               scroll one line up\n"
-        "  DownError or 'j' or SPACE    scroll one line down\n"
+        "  DownArrow or 'j' or SPACE    scroll one line down\n"
         "  LeftArrow or 'h'             scroll one line left\n"
         "  RightArrow or 'l'            scroll one line right\n"
         "  Home or 'g'                  move to the beginning\n"
