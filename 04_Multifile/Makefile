@@ -28,7 +28,7 @@ prog-a: prog.o liboutput_static.a
 	$(LINK.o) -L. $< $(LOADLIBES) $(LDLIBS) -loutput_static -o $@
 
 prog-so: prog.o liboutput.so
-	$(LINK.o) -L. -Wl,-rpath=. $< $(LOADLIBES) $(LDLIBS) -loutput -o $@
+	$(LINK.o) -L. -Wl,-rpath . $< $(LOADLIBES) $(LDLIBS) -loutput -o $@
 
 prog.o: outlib.h
 
