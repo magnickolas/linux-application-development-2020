@@ -1,5 +1,6 @@
 GENERATES = prog prog-a prog-so prog*.txt liboutput.so README
 TRASH = *.a *.o *~ o.*
+CFLAGS = -Wall -Werror -Wextra
 
 all: README prog prog-a prog-so
 
