@@ -8,13 +8,13 @@ all: README prog prog-a prog-so
 # $(2): string of arguments separated by space
 define test_with_args
 	echo "===Test with $(1) arguments==="
-	echo -n $^ | \
-	xargs -d' ' -I{} \
+	echo -n $^ | tr ' ' '\0' | \
+	xargs -0 -I{} \
 	      sh -c 'echo $(2) | xargs ./{} >{}$(1).txt 2>&1'
 	{ diff $<$(1).txt $(word 2,$^)$(1).txt && \
 	  diff $<$(1).txt $(word 3,$^)$(1).txt; } \
-	  && echo "\e[32mPASSED\e[0m" \
-	  || echo "\e[31mFAILED\e[0m"
+	  && printf "\e[1;32mPASSED\e[0m\n" \
+	  || printf "\e[1;31mFAILED\e[0m\n"
 endef
 
 test: prog prog-a prog-so
