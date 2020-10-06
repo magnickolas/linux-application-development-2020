@@ -1,7 +1,7 @@
 #include "outlib.h"
 #include <stdio.h>
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
     int i;
     if ((Count = argc) > 1) {
         output("<INIT>");
