@@ -13,10 +13,10 @@ define test_with_args
 	      sh -c '[ -z "$(2)" ] \
 	                 && ./{} >{}$(1).txt 2>&1 \
 	                 || echo $(2) | xargs ./{} >{}$(1).txt 2>&1'
-	  diff $<$(1).txt $(word 2,$^)$(1).txt && \
-	  diff $<$(1).txt $(word 3,$^)$(1).txt \
-	      && printf "\e[1;32mPASSED\e[0m\n" \
-	      || printf "\e[1;31mFAILED\e[0m\n"
+	diff $<$(1).txt $(word 2,$^)$(1).txt && \
+	diff $<$(1).txt $(word 3,$^)$(1).txt \
+	    && printf "\e[1;32mPASSED\e[0m\n" \
+	    || printf "\e[1;31mFAILED\e[0m\n"
 endef
 
 test: prog prog-a prog-so
