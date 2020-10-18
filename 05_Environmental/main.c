@@ -8,6 +8,7 @@
 #include <string.h>
 #include <wchar.h>
 
+#define DEL 0177
 #define KEY_ESC 033
 
 typedef struct WindowSize {
@@ -88,7 +89,7 @@ int main() {
             }
         } else if (c == KEY_ESC) {
             quit = true;
-        } else if (c == KEY_BACKSPACE) {
+        } else if (c == KEY_BACKSPACE || c == DEL) {
             if (win_in_focus == win_pat) {
                 pop_wstring(pat_wstr);
             } else {
