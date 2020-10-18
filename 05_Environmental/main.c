@@ -99,7 +99,7 @@ int main() {
             }
         } else if (c == '\n') {
             // Pass
-        }else {
+        } else {
             if (win_in_focus == win_pat) {
                 push_wstring(pat_wstr, c);
             } else {
