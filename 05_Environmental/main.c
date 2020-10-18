@@ -98,28 +98,29 @@ int main() {
                 pop_wstring(sub_wstr);
             }
         } else if (c == '\n') {
+            // Pass
+        }else {
+            if (win_in_focus == win_pat) {
+                push_wstring(pat_wstr, c);
+            } else {
+                push_wstring(sub_wstr, c);
+            }
+        }
+
+        if (pat_wstr->len + sub_wstr->len > 0) {
+            // Get match groups
             char* pat_str =
                 malloc((pat_wstr->len + 1) * sizeof(*pat_wstr->buf));
             char* sub_str =
                 malloc((sub_wstr->len + 1) * sizeof(*sub_wstr->buf));
             sprintf(pat_str, "%ls", pat_wstr->buf);
             sprintf(sub_str, "%ls", sub_wstr->buf);
-            char* matches = get_match_groups(pat_str, sub_str);
-            size_t len = strlen(res_str) + 1 + strlen(matches);
-            res_str = realloc(res_str, (len + 1) * sizeof(*res_str));
-            assert(res_str != NULL);
-            strcat(res_str, "\n");
-            strcat(res_str, matches);
-
-            free(matches);
+            free(res_str);
+            res_str = get_match_groups(pat_str, sub_str);
             free(pat_str);
             free(sub_str);
         } else {
-            if (win_in_focus == win_pat) {
-                push_wstring(pat_wstr, c);
-            } else {
-                push_wstring(sub_wstr, c);
-            }
+            res_str[0] = '\0';
         }
     }
 
