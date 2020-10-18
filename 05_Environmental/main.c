@@ -41,9 +41,6 @@ int main() {
                              input_fields_height, 0);
     refresh();
 
-    box(win_res, 0, 0);
-    wrefresh(win_res);
-
     WINDOW* win_in_focus = win_pat;
 
     bool quit = false;
