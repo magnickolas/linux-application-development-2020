@@ -2,7 +2,7 @@
 
 Accepts PCRE and a subject and prints out the match groups.
 
-![](/demo/demo.gif)
+![](demo/demo.gif)
 
 ## Key bindings
 
