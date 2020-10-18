@@ -10,6 +10,7 @@ Accepts PCRE and a subject and prints out the match groups.
 | --------- | ----------------------------------------- |
 | Shift+Tab | Switch between pattern and subject fields |
 | Enter     | Print the match groups                    |
+| ESC       | Quit                                      |
 
 ## Build
 ```console
