@@ -6,9 +6,9 @@ all: main
 .gdbinit:
 	echo "set history save on" > $@
 	find $(GLIBC_PATH) -maxdepth 1                           \
-		               ! -path $(GLIBC_PATH)                 \
-		               ! -path "$(GLIBC_PATH)/ChangeLog.old" \
-					   -type d                               \
+	                   ! -path $(GLIBC_PATH)                 \
+	                   ! -path "$(GLIBC_PATH)/ChangeLog.old" \
+	                   -type d                               \
 	| xargs -I{} echo directory {} >> $@
 
 main: main.c
