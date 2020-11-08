@@ -33,6 +33,12 @@ AC_CONFIG_FILES([Makefile
                  src/Makefile
                  tests/Makefile])
 
+AC_ARG_ENABLE([gcov],
+  [AS_HELP_STRING([--enable-gcov],
+    [use Gcov to test the test suite])],
+    [],
+    [enable_gcov=no])
+
 AM_CONDITIONAL([COND_GCOV],[test '!' "$enable_gcov" = no])
 
 AC_OUTPUT
