@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: guess 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-15 21:19+0300\n"
-"PO-Revision-Date: 2020-11-15 21:19+0300\n"
+"POT-Creation-Date: 2020-11-15 21:31+0300\n"
+"PO-Revision-Date: 2020-11-15 21:31+0300\n"
 "Last-Translator: Nikolai <magnickolas@pm.me>\n"
 "Language-Team: Russian\n"
 "Language: ru\n"
@@ -21,18 +21,18 @@ msgstr ""
 #: guess.c:16
 #, c-format
 msgid "Think of a number between %d and %d.\n"
-msgstr ""
+msgstr "Загадайте число от 1 до 100.\n"
 
 #: guess.c:23
 #, c-format
 msgid "Is your number greater than %d?\n"
-msgstr ""
+msgstr "Ваше число больше, чем %d?\n"
 
 #: guess.c:26
 msgid "yes\n"
-msgstr ""
+msgstr "да\n"
 
 #: guess.c:34
 #, c-format
 msgid "Your number is %d!\n"
-msgstr ""
+msgstr "Ваше число %d!\n"

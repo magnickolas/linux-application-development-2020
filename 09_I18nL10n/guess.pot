@@ -20,18 +20,18 @@ msgstr ""
 #: guess.c:15
 #, c-format
 msgid "Think of a number between %d and %d.\n"
-msgstr ""
+msgstr "Загадайте число от 1 до 100.\n"
 
 #: guess.c:22
 #, c-format
 msgid "Is your number greater than %d?\n"
-msgstr ""
+msgstr "Ваше число больше, чем %d?\n"
 
 #: guess.c:25
 msgid "yes\n"
-msgstr ""
+msgstr "да\n"
 
 #: guess.c:33
 #, c-format
 msgid "Your number is %d!\n"
-msgstr ""
+msgstr "Ваше число %d!\n"
