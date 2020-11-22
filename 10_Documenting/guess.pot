@@ -1,0 +1,55 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-11-20 15:02+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: guess.c:12
+msgid ""
+"Guess is used for guessing user's number from 1 to 100\n"
+"\n"
+"Usage: guess\n"
+"\n"
+"    --help\t\tprint this help, then exit\n"
+"    -r\t\tuse Roman numerals\n"
+"\n"
+"Guess uses binary search to guess user's number and asks questions\n"
+"\n"
+msgstr ""
+
+#: guess.c:120
+#, c-format
+msgid "Think of a number between %s and "
+msgstr ""
+
+#: guess.c:121
+#, c-format
+msgid "%s.\n"
+msgstr ""
+
+#: guess.c:128
+#, c-format
+msgid "Is your number greater than %s?\n"
+msgstr ""
+
+#: guess.c:131
+msgid "yes\n"
+msgstr ""
+
+#: guess.c:139
+#, c-format
+msgid "Your number is %s!\n"
+msgstr ""

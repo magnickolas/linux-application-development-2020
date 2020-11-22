@@ -1,0 +1,68 @@
+# Number guess program
+# Copyright (C) 2020
+# This file is distributed under the same license as the Guess package.
+# Nikolai Oplachko <magnickolas@pm.me>, 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: guess 0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-11-20 15:45+0300\n"
+"PO-Revision-Date: 2020-11-15 21:31+0300\n"
+"Last-Translator: Nikolai <magnickolas@pm.me>\n"
+"Language-Team: Russian\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: guess.c:13
+msgid ""
+"Guess is used for guessing user's number from 1 to 100\n"
+"\n"
+"Usage: guess\n"
+"\n"
+"    --help\t\tprint this help, then exit\n"
+"    --version\t\tprint version number, then exit\n"
+"    -r\t\t\tuse Roman numerals\n"
+"\n"
+"Guess uses binary search to guess user's number and asks questions\n"
+"\n"
+msgstr ""
+"Guess предназначена для угадывания числа пользователя от 1 до 100\n"
+"\n"
+"Использование: guess\n"
+"\n"
+"    --help\t\tвывести справку (это сообщение) и завершить работу\n"
+"    --version\t\tвывести информацию о версии guess и завершить работу\n"
+"    -r\t\t\tиспользовать римские цифры\n"
+"\n"
+"Guess использует двоичный поиск чтобы угадать число пользователя и задает "
+"вопросы\n"
+"\n"
+
+#: guess.c:126
+#, c-format
+msgid "Think of a number between %s and "
+msgstr "Загадайте число от %s до "
+
+#: guess.c:127
+#, c-format
+msgid "%s.\n"
+msgstr "%s.\n"
+
+#: guess.c:134
+#, c-format
+msgid "Is your number greater than %s?\n"
+msgstr "Ваше число больше, чем %s?\n"
+
+#: guess.c:137
+msgid "yes\n"
+msgstr "да\n"
+
+#: guess.c:145
+#, c-format
+msgid "Your number is %s!\n"
+msgstr "Ваше число %s!\n"
