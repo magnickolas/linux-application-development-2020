@@ -33,13 +33,13 @@ int main() {
         gchar** v = g_strsplit_set(line, " \t\r\n\v\f", MAX_LINE_LENGTH);
         gchar** p = v;
         while (*p) {
-            gchar* dup = g_strdup(*p);
             g_hash_table_insert(
-                hash_table, dup,
-                GINT_TO_POINTER((gint)((glong)g_hash_table_lookup(hash_table, dup) + 1)));
+                hash_table, *p,
+                GINT_TO_POINTER(
+                    (gint)((glong)g_hash_table_lookup(hash_table, *p) + 1)));
             ++p;
         }
-        g_strfreev(v);
+        g_free(v);
     }
     GList* keys = g_hash_table_get_keys(hash_table);
     GList* words = g_list_copy(keys);
